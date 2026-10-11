@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="theme-color" content="#163e35"><meta name="description" content="Задачи математической олимпиады ИТМО за 2020–2025 годы с проверкой ответов и поэтапными учебными подсказками.">
+ <title>Математика по шагам · ИТМО</title>
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23163e35'/%3E%3Ctext x='32' y='45' text-anchor='middle' fill='%23dbefa5' font-size='44' font-family='Georgia'%3EΣ%3C/text%3E%3C/svg%3E">
+ <link rel="stylesheet" href="./style.css"><script type="module" src="./app.js"></script>
+</head>
+<body>
+ <a class="skip" href="#main">Перейти к задаче</a>
+ <div class="shell">
+  <aside class="sidebar" aria-label="Выбор задачи">
+   <a class="brand" href="#2025-1"><span class="brand-symbol" aria-hidden="true">Σ</span><span>По шагам<span class="brand-sub">МАТЕМАТИКА · ИТМО</span></span></a>
+   <div class="sidebar-intro">Сначала попробуй.<br>Потом — маленькая подсказка.</div>
+   <label class="control-label" for="year">Год олимпиады</label>
+   <select id="year"><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="warm">Разминка · основы</option></select>
+   <label class="control-label" for="topic">Тема</label><select id="topic"></select>
+   <label class="sr-only" for="search">Поиск задачи</label><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Найти задачу…" autocomplete="off"></div>
+   <div class="list-heading"><span id="list-caption">Задачи 2025 года</span><span id="list-count"></span></div>
+   <nav id="task-list" aria-label="Задачи выбранного года"></nav>
+   <button id="warmup" class="warmup-link"><span aria-hidden="true">↗</span><span>Нужна база?<small>4 короткие разминки</small></span></button>
+   <div class="sidebar-footer"><a href="https://im.itmo.ru/ru/events/olymp_spb" target="_blank" rel="noopener noreferrer">Официальный архив ↗</a><p>Подборка, а не полный архив.<br>15 задач · 6 лет · 4 разминки</p></div>
+  </aside>
+  <main id="main" class="main">
+   <header class="topbar"><span class="eyebrow">ТВОЯ ПОДГОТОВКА К ОЛИМПИАДЕ</span><span class="private"><span aria-hidden="true">▣</span> Открытый тренажёр</span></header>
+   <div id="storage-alert" class="storage-alert" role="status" hidden>В этом браузере сохранение недоступно. Можно заниматься, но прогресс пропадёт после закрытия страницы.</div>
+   <section class="intro"><div><h1>Большая задача.<br><em>Маленькие шаги.</em></h1><p>Не нужно видеть всё решение сразу.<br>Начни с того, что уже понятно.</p></div><div class="progress-card"><div class="progress-meta"><span>Твой прогресс</span><strong id="progress-count">0 / 19</strong></div><div class="progress-track" role="progressbar" aria-label="Решённые задачи" aria-valuemin="0" aria-valuemax="19" aria-valuenow="0"><span id="progress-fill"></span></div><p id="progress-detail">Каждая попытка — часть обучения.</p><button id="progress-button" class="text-button">Посмотреть результаты ↗</button></div></section>
+   <div class="task-toolbar"><span id="breadcrumb"></span><div><button id="prev" class="round-button" aria-label="Предыдущая задача">←</button><button id="next" class="round-button" aria-label="Следующая задача">→</button></div></div>
+   <div class="workspace">
+    <section id="task-card" class="paper task-card" aria-labelledby="task-title">
+     <div class="task-top"><span id="task-topic" class="tag"></span><span id="task-time" class="muted"></span></div><h2 id="task-title" tabindex="-1"></h2><div id="task-origin" class="origin"></div><div id="statement" class="statement"></div>
+     <details id="diagram-details" class="diagram-details" hidden><summary>Показать координатную схему</summary><div id="diagram"></div></details>
+     <div class="answer-section"><div class="answer-heading"><h3>Твой ответ</h3><span id="solved-badge" class="solved-badge" hidden>✓ Решено</span></div><form id="answer-form" novalidate><div id="answer-fields"></div><p id="format-help" class="format-help"></p><div class="answer-actions"><button type="submit" class="primary">Проверить ответ <span aria-hidden="true">↗</span></button><span id="attempt-count"></span></div></form><div id="feedback" role="status" aria-live="polite" hidden></div><p class="checker-note">Проверяется итоговый ответ. Обоснование и ход решения сохраняй в черновике.</p></div>
+     <details class="notes"><summary>Черновик <span>сохраняется автоматически</span></summary><label class="sr-only" for="notes">Мои заметки по задаче</label><textarea id="notes" rows="6" maxlength="12000" placeholder="Что известно? Что ищу? Какую подстановку хочу попробовать?"></textarea></details>
+     <div class="task-bottom"><a id="source-link" target="_blank" rel="noopener noreferrer">PDF: условия и официальные решения ↗</a><span id="source-page"></span></div>
+    </section>
+    <aside class="learning-column" aria-label="Подсказки и справочник">
+     <section class="hint-panel"><div class="hint-heading"><span class="hint-icon" aria-hidden="true">✦</span><div><h3>По одной подсказке</h3><p>Ты управляешь темпом.</p></div><span id="hint-counter">0 / 5</span></div><div id="hint-empty"><div class="hint-art" aria-hidden="true"><span>?</span><span>→</span><span>!</span></div><h4>Застрять — нормально.</h4><p>Подсказка предложит следующий ход,<br>а вычисления оставит тебе.</p></div><div id="hints"></div><button id="hint-button" class="hint-button">Дай первую подсказку <span aria-hidden="true">+</span></button><div class="solution-gate"><button id="solution-button" class="text-button" disabled>Открыть полный разбор</button><p id="solution-gate-note">Сначала пройди подсказки или реши задачу.</p></div><div id="solution" hidden></div></section>
+     <section class="reference paper"><div class="reference-heading"><span aria-hidden="true">↳</span><h3>Под рукой</h3></div><details><summary>Раскрытие квадратов</summary><p>Каждый член первой скобки умножь на каждый член второй.</p><div class="formula">(a − b)² = a² − 2ab + b²</div><div class="formula">(a + b)² = a² + 2ab + b²</div><p>При вычитании скобки знак меняется у каждого её слагаемого: −(a − b) = −a + b.</p></details><details><summary>Координаты и окружности</summary><p>x и y — координаты точки, которую мы ищем. Известные координаты других точек им не мешают.</p><div class="formula">(x − a)² + (y − b)² = R²</div><p>Центр — (a, b), радиус — R. Вычитая два уравнения, вычитай всю левую часть из всей левой и всю правую из всей правой.</p></details><details><summary>Функциональные уравнения</summary><p>f — правило, которое каждому аргументу выдаёт число. f(0) — одно число; f(x) — значение при неизвестном x.</p><ol><li>Проверь x = 0 и y = 0.</li><li>Попробуй поменять x и y местами.</li><li>Сделай сложный аргумент нулём.</li><li>Проверь найденную формулу в исходном условии.</li></ol><p>f(x) = C значит, что функция выдаёт одно и то же число при любом x. Найти пару примеров недостаточно: нужно объяснить, почему других решений нет.</p></details></section>
+    </aside>
+   </div>
+   <footer class="main-footer"><span>Учебный тренажёр по материалам олимпиады СПб в ИТМО.</span><span>Прогресс хранится в этом браузере.</span></footer>
+  </main>
+ </div>
+ <dialog id="progress-dialog" aria-labelledby="progress-title"><div class="dialog-heading"><h2 id="progress-title">Твои результаты</h2><button id="close-progress" class="round-button" aria-label="Закрыть результаты">×</button></div><p class="muted">Решение с подсказками тоже считается. Открытый разбор отмечается отдельно.</p><div id="progress-list"></div><div class="dialog-actions"><button id="export-progress" class="secondary">Скачать прогресс</button><button id="reset-button" class="text-button danger">Сбросить прогресс</button></div><div id="reset-confirm" hidden><p>Удалить ответы, заметки и отметки о решённых задачах в этом браузере?</p><button id="confirm-reset" class="secondary danger">Да, сбросить</button><button id="cancel-reset" class="text-button">Отмена</button></div></dialog>
+ <noscript><p class="noscript">Для проверки ответов и подсказок включи JavaScript в браузере.</p></noscript>
+</body></html>
